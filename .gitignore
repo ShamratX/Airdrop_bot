@@ -1,0 +1,33 @@
+# Secrets — never upload
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Local user / proof data
+data/*.csv
+data/users_sheet*.csv
+data/presale_proofs_sheet*.csv
+data/.x_admin_verify_only
+
+# Keep empty data folder in repo
+!data/.gitkeep
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+*.log
