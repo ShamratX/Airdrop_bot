@@ -31,11 +31,11 @@ cp .env.example .env
 python bot.py
 ```
 
-Run **one** instance only (duplicate polling ? Telegram 409 Conflict).
+Run **one** instance only (duplicate polling causes Telegram 409 Conflict).
 
 ## Config (env names)
 
-`BOT_TOKEN`, `BOT_USERNAME`, `BOT_DESCRIPTION`, `PROJECT_NAME`, `PROJECT_WEBSITE`, `CHANNEL_USERNAME`, `CHANNEL_ID`, `GROUP_USERNAME`, `GROUP_ID`, `GROUP_INVITE_LINK`, `X_PROFILE_URL`, `X_POST_URL`, `PRESALE_URL`, `TGE_DATE`, `AIRDROP_REWARD`, `REFERRAL_REWARD`, `REQUIRED_REFERRALS`, tier keys (`TIER_BRONZE_USD`, `TIER_BRONZE_BONUS`, Ö), `ADMIN_IDS`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+`BOT_TOKEN`, `BOT_USERNAME`, `BOT_DESCRIPTION`, `PROJECT_NAME`, `PROJECT_WEBSITE`, `CHANNEL_USERNAME`, `CHANNEL_ID`, `GROUP_USERNAME`, `GROUP_ID`, `GROUP_INVITE_LINK`, `X_PROFILE_URL`, `X_POST_URL`, `PRESALE_URL`, `TGE_DATE`, `AIRDROP_REWARD`, `REFERRAL_REWARD`, `REQUIRED_REFERRALS`, tier keys (`TIER_BRONZE_USD`, `TIER_BRONZE_BONUS`, and related), `ADMIN_IDS`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
 
 ## Project structure
 
@@ -52,9 +52,9 @@ data/                 # buyer CSV sheets
 ## Limitations
 
 - Branding/defaults target CatIQ; change env copy for other projects.
-- Buy proofs are operational CSVs + admin export ó not on-chain settlement.
+- Buy proofs are operational CSVs + admin export ù not on-chain settlement.
 - Keep service-role Supabase key private.
 
 ## Related
 
-CatIQ site: [catiq.xyz](https://www.catiq.xyz) ∑ Community landing: `community` repo
+CatIQ site: [catiq.xyz](https://www.catiq.xyz) ù Community landing: `community` repo
