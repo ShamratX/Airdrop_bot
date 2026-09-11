@@ -1,60 +1,63 @@
-# CatIQ Airdrop Bot
+# CatIQ Airdrop Bot (`@CatIQAirdrop_bot`)
 
-Telegram bot for **CatIQ** social tasks, optional referrals, wallet submit, and a separate buy/presale proof flow. User progress is stored in **Supabase** (`bot_users`).
+Telegram airdrop bot for CatIQ ($CIQ): social tasks, optional invite bonus, wallet submit, and a separate Buy page.
 
-## Features
+User progress is stored in **Supabase** (`bot_users`). Buyer CSV sheets are only for optional buy proofs.
 
-- Required tasks: follow X, retweet+like, join Telegram channel + group
-- Optional invite bonus; wallet submission after core tasks
-- Buy tiers with TXID / proof stored to CSV sheets under `data/`
-- Admin commands: `/stats`, `/export`
-- Referral deep links: `t.me/<BOT_USERNAME>?start=ref_<user_id>`
+## Flow
 
-## How it works
+| Step | Task | Required |
+|------|------|----------|
+| 1 | Follow X | Yes |
+| 2 | Retweet + Like X pin | Yes |
+| 3 | Join Telegram channel | Yes |
+| 4 | Join Telegram group | Yes |
+| 5 | Invite friends (bonus) | Optional |
+| 6 | Submit wallet (airdrop) | After core tasks |
+| 7 | Buy (presale page) | Separate / optional |
 
-`bot.py` runs a python-telegram-bot application. Task completion and wallet state persist through `supabase_store.py`. Buyer proofs append to CSV sheets for admin export.
+### Buy tiers (Phase 4: Presale Buyers VIP)
 
-## Requirements
+- Buy **$20+** í **1000 $CIQ**
+- Buy **$50+** í **3000 $CIQ**
+- Buy **$100+** í **7000 $CIQ**
+- Buy **$200+** í **15000 $CIQ**
 
-- Python 3.10+
-- Telegram bot token (BotFather)
-- Supabase project + `bot_users` schema (`supabase_bot_users.sql`)
-- Bot admin in the configured channel/group
+Buy wallet/TXID proof is separate from airdrop wallet (contract/on-chain can hold buy data).
 
-## Quick start
+## Setup
 
-```bash
+```powershell
+cd CatIQAirdrop_Bot
 python -m venv .venv
-# Windows: .\.venv\Scripts\Activate.ps1
+.\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
-cp .env.example .env
+copy .env.example .env
+```
+
+Edit `.env`:
+
+- `BOT_TOKEN`  from @BotFather
+- `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`
+- Create `bot_users` table  see `supabase_bot_users.sql`
+- `ADMIN_IDS`  your Telegram user id
+- `X_POST_URL`  live tweet to retweet
+- Bot must be **admin** in channel + group
+
+## Run
+
+```powershell
+.\.venv\Scripts\Activate.ps1
 python bot.py
 ```
 
-Run **one** instance only (duplicate polling causes Telegram 409 Conflict).
+Keep the terminal open. **Only one** `python bot.py` at a time (otherwise Telegram `409 Conflict`).
 
-## Config (env names)
+## Admin
 
-`BOT_TOKEN`, `BOT_USERNAME`, `BOT_DESCRIPTION`, `PROJECT_NAME`, `PROJECT_WEBSITE`, `CHANNEL_USERNAME`, `CHANNEL_ID`, `GROUP_USERNAME`, `GROUP_ID`, `GROUP_INVITE_LINK`, `X_PROFILE_URL`, `X_POST_URL`, `PRESALE_URL`, `TGE_DATE`, `AIRDROP_REWARD`, `REFERRAL_REWARD`, `REQUIRED_REFERRALS`, tier keys (`TIER_BRONZE_USD`, `TIER_BRONZE_BONUS`, and related), `ADMIN_IDS`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+- `/stats`  counts
+- `/export`  buyer CSV sheet files
 
-## Project structure
+## Referral link
 
-```text
-bot.py
-config.py
-storage.py
-supabase_store.py
-supabase_bot_users.sql
-data/                 # buyer CSV sheets
-.env.example
-```
-
-## Limitations
-
-- Branding/defaults target CatIQ; change env copy for other projects.
-- Buy proofs are operational CSVs + admin export ù not on-chain settlement.
-- Keep service-role Supabase key private.
-
-## Related
-
-CatIQ site: [catiq.xyz](https://www.catiq.xyz) ù Community landing: `community` repo
+`https://t.me/CatIQAirdrop_bot?start=ref_<user_id>`
